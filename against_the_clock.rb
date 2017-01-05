@@ -7,8 +7,8 @@ class Window < Gosu::Window
     $window = self
     super(800, 600, false)
     @dead  = false
-    @time  = rand(3..7)*60*60*24
-    @speed = 10000#rand(10..25)
+    @time  = (7)*60*60*24
+    @speed = 1997#rand(900..1000)
     @dt    = (Gosu.milliseconds/1000.0)
     @clock = Game::Text.new(seconds_to_time(@time), x: 0, y: 36, color: Gosu::Color::WHITE, size: 24)
     @cause_of_death = Game::Text.new("", x: 36, y: 300, color: Gosu::Color::WHITE, size: 24)
@@ -23,7 +23,7 @@ class Window < Gosu::Window
     @hunger.value = 100.0
     @hunger.dangerous_amount = 25.0
     @hunger.fatal_amount = 0.0
-    @hunger.decrease_per_second = 0.01
+    @hunger.decrease_per_second = 0.001
     @hunger.time_at_last_change = (Gosu.milliseconds/1000.0)*@speed
     @hunger.bar_color = Gosu::Color.rgb(100,0,30)
     @hunger.death_messages = ["Got lost in a desert without food.", "Lost your ration pack."]
@@ -33,7 +33,7 @@ class Window < Gosu::Window
     @hydration.value = 100.0
     @hydration.dangerous_amount = 60.0
     @hydration.fatal_amount = 0.0
-    @hydration.decrease_per_second = 0.05
+    @hydration.decrease_per_second = 0.005
     @hydration.time_at_last_change = (Gosu.milliseconds/1000.0)*@speed
     @hydration.bar_color = Gosu::Color::BLUE
     @hydration.death_messages = ["Got lost in a desert without water.", "Dried up like a raisin."]
@@ -43,7 +43,7 @@ class Window < Gosu::Window
     @happiness.value = 100.0
     @happiness.dangerous_amount = 35.0
     @happiness.fatal_amount = 0.0
-    @happiness.decrease_per_second = 0.03
+    @happiness.decrease_per_second = 0.003
     @happiness.time_at_last_change = (Gosu.milliseconds/1000.0)*@speed
     @happiness.bar_color = Gosu::Color.rgb(0,100,0)
     @happiness.death_messages = ["Got lost in a daydream while driving.", "Lost your your will to live."]
@@ -93,7 +93,7 @@ class Window < Gosu::Window
 
     if @time <= 0 && !@dead
       @dead = true
-      @clock.text = ""+seconds_to_time(@time)
+      @clock.text = "You died, ran out if time."#+seconds_to_time(@time)
     end
   end
 
